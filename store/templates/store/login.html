@@ -1,0 +1,52 @@
+{% extends 'store/user.html' %}
+{% block content %}
+
+<div class="container my-5" style="max-width:500px;">
+    <p class="text-center h1 fw-bold mb-5" style="color:#1B3B1A; font-family:'Cursive', sans-serif;">Login</p>
+
+    <form method="POST">
+        {% csrf_token %}
+
+        <!-- Username -->
+        <div class="mb-4">
+            <label for="username" class="form-label fw-bold" style="color:#2C5F2D;">Username</label>
+            <input type="text" name="username" id="username" class="form-control">
+        </div>
+
+        <!-- Password -->
+        <div class="mb-4">
+            <label for="password" class="form-label fw-bold" style="color:#2C5F2D;">Password</label>
+            <input type="password" name="password" id="password" class="form-control">
+        </div>
+
+        <!-- Submit Button -->
+        <div class="d-flex justify-content-center mb-4">
+            <button type="submit" class="btn w-100" style="background-color:#7BAF9E; color:white; border-radius:25px; padding:10px;">
+                Login
+            </button>
+        </div>
+
+        <!-- Register Link -->
+        <p class="text-center">Don't have an account? <a href="/register" style="color:#2C5F2D; font-weight:bold;">Register Now</a></p>
+
+    </form>
+
+    <style>
+        input {
+            border-radius: 10px;
+            border: 1px solid #B7CBB7;
+            padding: 10px;
+            width: 100%;
+            background-color:#F0F5F1;
+            color:#1B3B1A;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #7BAF9E;
+            box-shadow: 0 0 5px rgba(123,175,158,0.5);
+        }
+    </style>
+</div>
+
+{% endblock content %}

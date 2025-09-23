@@ -1,0 +1,49 @@
+{% extends 'store/main.html' %}
+{% block content %}
+<style>
+  .bkash-confirm {
+    max-width: 720px;
+    margin: 40px auto;
+    background: linear-gradient(180deg, #ffeef6 0%, #ffd7ec 100%);
+    border-radius: 12px;
+    padding: 28px;
+    box-shadow: 0 8px 30px rgba(226, 75, 154, 0.12);
+    color: #4a142b;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  }
+  .bkash-confirm h1 { margin: 0 0 8px; color: #a10f4a; }
+  .bkash-confirm p { margin: 8px 0; }
+  .bkash-key {
+    display:inline-block;
+    background:#fff0f6;
+    padding:8px 12px;
+    border-radius:8px;
+    font-weight:600;
+    color:#c21866;
+    border:1px solid rgba(194,25,102,0.12);
+  }
+  .bkash-actions { margin-top:18px; }
+  .btn-store {
+    background:#c21866;
+    color:white;
+    padding:10px 16px;
+    border-radius:8px;
+    text-decoration:none;
+  }
+</style>
+
+<div class="bkash-confirm">
+  <h1>Payment Received ✅</h1>
+  <p class="lead">Thank you — your payment has been processed.</p>
+
+  <p><strong>Transaction ID:</strong> <span class="bkash-key">{{ transaction_id }}</span></p>
+  <p><strong>Order ID:</strong> <span class="bkash-key">{{ order_id }}</span></p>
+  <p><strong>Total:</strong> <span class="bkash-key">${{ total }}</span></p>
+
+  <div class="bkash-actions">
+    <a class="btn-store" href="{% url 'store' %}">Back to store</a>
+    &nbsp;&nbsp;
+    <a href="{% url 'cart' %}">View Cart / Orders</a>
+  </div>
+</div>
+{% endblock %}

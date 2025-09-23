@@ -1,0 +1,88 @@
+{% extends 'store/user.html' %}
+{% block content %}
+
+<div class="container my-5" style="max-width:500px;">
+    <p class="text-center h1 fw-bold mb-5" style="color:#1B3B1A; font-family:'Cursive', sans-serif;">Sign Up</p>
+
+    <form method="POST">
+        {% csrf_token %}
+
+        <!-- First Name -->
+        <div class="mb-4">
+            <label for="id_firstname" class="form-label fw-bold" style="color:#2C5F2D;">First Name</label>
+            {{ form.firstname }}
+            {{ form.firstname.errors }}
+        </div>
+
+        <!-- Last Name -->
+        <div class="mb-4">
+            <label for="id_lastname" class="form-label fw-bold" style="color:#2C5F2D;">Last Name</label>
+            {{ form.lastname }}
+            {{ form.lastname.errors }}
+        </div>
+
+        <!-- Username -->
+        <div class="mb-4">
+            <label for="id_username" class="form-label fw-bold" style="color:#2C5F2D;">Username</label>
+            {{ form.username }}
+            {{ form.username.errors }}
+        </div>
+        
+        <!-- Email -->
+        <div class="mb-4">
+            <label for="id_email" class="form-label fw-bold" style="color:#2C5F2D;">Email</label>
+            {{ form.email }}
+            {{ form.email.errors }}
+        </div>
+
+        <!-- Password -->
+        <div class="mb-4">
+            <label for="id_password1" class="form-label fw-bold" style="color:#2C5F2D;">Password</label>
+            {{ form.password1 }}
+            {{ form.password1.errors }}
+        </div>
+
+        <!-- Confirm Password -->
+        <div class="mb-4">
+            <label for="id_password2" class="form-label fw-bold" style="color:#2C5F2D;">Re-enter Password</label>
+            {{ form.password2 }}
+            {{ form.password2.errors }}
+        </div>
+
+        <!-- Submit Button -->
+        <div class="d-flex justify-content-center mb-4">
+            <button type="submit" class="btn w-100" style="background-color:#7BAF9E; color:white; border-radius:25px; padding:10px;">
+                Register
+            </button>
+        </div>
+
+        <!-- Already have account -->
+        <p class="text-center">Already have an account? <a href="/login" style="color:#2C5F2D; font-weight:bold;">Login</a></p>
+
+    </form>
+
+    <style>
+        input {
+            border-radius: 10px;
+            border: 1px solid #B7CBB7;
+            padding: 10px;
+            width: 100%;
+            background-color:#F0F5F1;
+            color:#1B3B1A;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #7BAF9E;
+            box-shadow: 0 0 5px rgba(123,175,158,0.5);
+        }
+
+        .errorlist {
+            color: #E2136E;
+            font-weight: bold;
+            margin-top: 5px;
+        }
+    </style>
+</div>
+
+{% endblock content %}

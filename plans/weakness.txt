@@ -1,0 +1,7 @@
+1. No notification when a product is added to cart
+2. Doesnt show wrong id or password
+3. Shipping address remains empty in admin panel
+4. No proper way to get into admin panel
+5. plus/minus images in static/images are deleted, need to re-add them
+6. Products dont have separate description page
+7. 

@@ -1,0 +1,98 @@
+{% extends 'store/main.html' %}
+{% load static %}
+{% block content %}
+
+<div class="container my-5">
+
+    <!-- Continue Shopping -->
+    <div class="mb-4">
+        <a class="btn btn-outline-dark" href="{% url 'store' %}">&#x2190; Continue Shopping</a>
+    </div>
+
+    <div class="row g-4">
+
+        <!-- Cart Summary -->
+        <div class="col-lg-4">
+            <div class="card shadow-sm border-0 rounded-4" style="background-color: #E6F0EA;">
+                <div class="card-body text-center">
+                    <h5 class="card-title mb-3" style="color:#1B3B1A; font-family:'Cursive', sans-serif;">Order Summary</h5>
+                    <hr>
+                    <div class="d-flex justify-content-between mb-2">
+                        <span>Items:</span>
+                        <strong>{{ order.get_total_quantity }}</strong>
+                    </div>
+                    <div class="d-flex justify-content-between mb-3">
+                        <span>Total:</span>
+                        <strong>৳{{ order.get_total_price|floatformat:2 }}</strong>
+                    </div>
+                    <a class="btn btn-sage w-100" href="{% url 'checkout' %}" style="background-color: #7BAF9E; color:white; border-radius:25px; padding:8px 0;">
+                        Proceed to Checkout
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Cart Items -->
+        <div class="col-lg-8">
+            <div class="card shadow-sm border-0 rounded-4" style="background-color:#E6F0EA;">
+                <div class="card-body">
+                    <h5 class="card-title text-center mb-3" style="color:#1B3B1A; font-family:'Cursive', sans-serif;">Your Cart</h5>
+                    <hr>
+                    {% for order_product in order_products %}
+                        <div class="d-flex align-items-center justify-content-between mb-3 p-3 cart-item rounded-3" style="background-color: #F0F5F1;">
+                            <div class="d-flex align-items-center" style="flex:2;">
+                                <img src="{{ order_product.product.imageURL }}" alt="product" class="img-fluid" style="width:70px; height:70px; object-fit:cover; border-radius:5px;">
+                                <p class="mb-0 ms-3" style="color:#2C5F2D;">{{ order_product.product.name }}</p>
+                            </div>
+                            <div style="flex:1; text-align:center; color:#2C5F2D;">
+                                ৳{{ order_product.product.price }}
+                            </div>
+                            <div style="flex:1; text-align:center;">
+                                <div class="d-flex align-items-center justify-content-center">
+                                    <img class="chg-quantity update-cart me-2" data-product={{ order_product.product.id }} data-action="add" src="{% static 'images/up.png' %}" style="cursor:pointer; width:20px;">
+                                    <span style="color:#1B3B1A;">{{ order_product.quantity }}</span>
+                                    <img class="chg-quantity update-cart ms-2" data-product={{ order_product.product.id }} data-action="remove" src="{% static 'images/down.png' %}" style="cursor:pointer; width:20px;">
+                                </div>
+                            </div>
+                            <div style="flex:1; text-align:center; color:#2C5F2D;">
+                                ৳{{ order_product.get_total|floatformat:2 }}
+                            </div>
+                        </div>
+                    {% empty %}
+                        <p class="text-center text-muted">Your cart is empty.</p>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<style>
+    /* Card hover effect */
+    .card:hover {
+        transform: translateY(-5px);
+        transition: 0.3s;
+        box-shadow: 0 10px 20px rgba(43, 92, 66, 0.2);
+    }
+
+    /* Sage button hover */
+    .btn-sage:hover {
+        background-color: #5E8C7A !important;
+        transform: scale(1.05);
+        transition: 0.2s;
+    }
+
+    /* Typography */
+    .card-title {
+        font-weight: 700;
+        font-size: 1.3rem;
+    }
+
+    body {
+        background-color: #F0F5F1;
+        font-family: 'Helvetica Neue', Arial, sans-serif;
+    }
+</style>
+
+{% endblock content %}

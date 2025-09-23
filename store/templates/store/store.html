@@ -1,0 +1,58 @@
+{% extends 'store/main.html' %}
+{% load static %}
+{% block content %}
+<div class="container mt-5">
+
+    <!-- Welcome Header -->
+    <h2 class="text-center mb-5" style="font-family: 'Cursive', sans-serif; color: #2C5F2D;">
+        Welcome, {{ request.user }}!
+    </h2>
+
+    <div class="row g-4">
+        {% for product in products %}
+            <div class="col-md-6 col-lg-4">
+                <div class="card h-100 shadow-sm border-0 rounded-4" style="background-color: #E6F0EA;">
+                    <img src="{{ product.imageURL }}" class="card-img-top rounded-top-4" alt="{{ product.name }}" style="height: 280px; object-fit: cover;">
+                    <div class="card-body d-flex flex-column text-center">
+                        <h5 class="card-title mb-2" style="font-family: 'Cursive', sans-serif; color: #1B3B1A;">{{ product.name }}</h5>
+                        <p class="card-text fs-5 text-success mb-3">৳{{ product.price }}</p>
+                        <button data-product="{{ product.id }}" data-action="add" class="btn btn-sage btn-sm update-cart" style="background-color: #7BAF9E; color: #fff; border-radius: 25px; padding: 6px 20px;">
+                            Add to Cart
+                        </button>
+                    </div>
+                </div>
+            </div>
+        {% empty %}
+            <p class="text-center text-muted">No products available.</p>
+        {% endfor %}
+    </div>
+</div>
+
+<style>
+    /* Card hover effect */
+    .card:hover {
+        transform: translateY(-8px);
+        transition: 0.3s;
+        box-shadow: 0 15px 25px rgba(43, 92, 66, 0.25);
+    }
+
+    /* Sage button hover */
+    .btn-sage:hover {
+        background-color: #5E8C7A !important;
+        color: #fff;
+        transform: scale(1.05);
+        transition: 0.2s;
+    }
+
+    /* Typography */
+    .card-title {
+        font-weight: 700;
+        font-size: 1.2rem;
+    }
+
+    body {
+        background-color: #F0F5F1;
+        font-family: 'Helvetica Neue', Arial, sans-serif;
+    }
+</style>
+{% endblock content %}

@@ -1,0 +1,175 @@
+/* --- Body & Background --- */
+body {
+    background-color: #304d3b; /* lighter dark sage */
+    color: #d3d3c3; /* lighter text for readability */
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* --- Login box --- */
+.login-box, .card {
+    background-color: #3f6b56; /* lighter evergreen box */
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+}
+
+/* --- Login header text --- */
+.login-logo a, .login-logo img {
+    display: block;
+    margin: 0 auto;
+}
+
+.login-logo a {
+    color: #c1d9a3 !important; /* lighter evergreen text */
+    font-size: 2rem;
+    font-weight: bold;
+    text-align: center;
+}
+
+/* --- Logo image --- */
+.login-logo img {
+    width: 120px;  /* fixed width */
+    height: 120px; /* fixed height */
+    object-fit: cover;
+    border-radius: 16px;
+    margin-bottom: 10px;
+}
+
+/* --- Login form --- */
+.login-box input[type="text"],
+.login-box input[type="password"],
+.login-box input[type="email"] {
+    background-color: #4a7d63; /* lighter input bg */
+    border: 1px solid #5f8d6f;
+    color: #e0e0d4;
+}
+
+.login-box input:focus {
+    border-color: #c1d9a3;
+    box-shadow: 0 0 5px #c1d9a3;
+}
+
+/* --- Buttons --- */
+.login-box .btn-primary {
+    background-color: #5f8d6f;
+    border-color: #4a7058;
+    color: #f0f0e0;
+}
+
+.login-box .btn-primary:hover {
+    background-color: #7aae88;
+    border-color: #5f8d6f;
+}
+
+/* --- Links --- */
+.login-box a {
+    color: #aad3a2 !important; /* lighter green links */
+}
+
+.login-box a:hover {
+    color: #e0e0d4 !important;
+}
+
+/* --- Admin text after login --- */
+body, .module, .card, .fieldBox, .module h2, .form-row {
+    color: #3ca372 !important; /* lighter evergreen text */
+}
+
+/* --- Links --- */
+a, a:visited {
+    color: #c2c4c3 !important;  /* lighter green */
+}
+
+a:hover {
+    color: #9cd9b5 !important;  /* even lighter green on hover */
+}
+
+/* Tables text */
+table th, table td {
+    color: #3ca372 !important;
+}
+
+/* Optional: placeholder color in inputs */
+input::placeholder, textarea::placeholder {
+    color: #7aa776 !important;
+}
+
+/* --- Footer --- */
+.login-box .footer {
+    color: #b0b0b0;
+}
+
+/* --- Sidebar --- */
+#header, .sidebar, .main-sidebar {
+    background-color: #3f6b56 !important; /* lighter evergreen sidebar */
+}
+
+/* Sidebar menu items */
+.nav-sidebar .nav-link {
+    color: #c1e0b3 !important; /* lighter green text */
+}
+
+/* Sidebar menu items on hover or active */
+.nav-sidebar .nav-link:hover, 
+.nav-sidebar .nav-link.active {
+    color: #e0f4d9 !important; /* lighter green hover */
+    background-color: #56846b !important; /* slightly lighter bg for hover */
+}
+
+/* Sidebar menu icons */
+.nav-sidebar .nav-icon {
+    color: #c1e0b3 !important;
+}
+
+/* Brand text and profile */
+.brand-link, .user-panel .info a {
+    color: #d3e8c8 !important; /* light green */
+}
+/* --- Custom button overrides --- */
+.btn-xs.btn-success.addlink {
+    background-color: #6fc17c !important; /* lighter green */
+    border-color: #5aa362 !important;
+    color: #f0f0e0 !important; /* text color */
+}
+
+.btn-xs.btn-success.addlink:hover {
+    background-color: #8ed69b !important;
+    border-color: #6fc17c !important;
+    color: #ffffff !important;
+}
+
+.btn-xs.btn-info.changelink {
+    background-color: #5fa7c3 !important; /* lighter blue */
+    border-color: #4a88a0 !important;
+    color: #f0f0e0 !important;
+}
+
+.btn-xs.btn-info.changelink:hover {
+    background-color: #7fc0e0 !important;
+    border-color: #5fa7c3 !important;
+    color: #ffffff !important;
+}
+
+/* --- Success button on right --- */
+.btn.btn-success.float-right {
+    background-color: #6fc17c !important;  /* lighter green */
+    border-color: #5aa362 !important;
+    color: #f0f0e0 !important;  /* text color */
+}
+
+.btn.btn-success.float-right:hover {
+    background-color: #8ed69b !important;
+    border-color: #6fc17c !important;
+    color: #ffffff !important;
+}
+/* --- Cancel button in form --- */
+.btn.btn-danger.cancel-link.form-control {
+    background-color: #6fa8dc !important;  /* lighter blue */
+    border-color: #558ac4 !important;
+    color: #f0f0f0 !important;  /* text color */
+}
+
+.btn.btn-danger.cancel-link.form-control:hover {
+    background-color: #8bb9e6 !important;
+    border-color: #6fa8dc !important;
+    color: #ffffff !important;
+}

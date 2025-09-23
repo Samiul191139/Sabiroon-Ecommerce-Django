@@ -1,0 +1,17 @@
+{% extends 'store/main.html' %}
+{% block content %}
+<div class="container mt-5">
+    <h3>Bkash Payment Confirmation</h3>
+    <p>An OTP has been sent to your number: <strong>+8801XXXXXXXXX</strong></p>
+    <form method="POST">
+        {% csrf_token %}
+        <div class="form-group mt-3">
+            <input type="text" class="form-control" name="otp" placeholder="Enter OTP">
+        </div>
+        <button type="submit" class="btn mt-3" 
+                style="background-color:#E2136E; color:white;">
+            Confirm Payment
+        </button>
+    </form>
+</div>
+{% endblock %}

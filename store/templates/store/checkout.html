@@ -1,0 +1,105 @@
+{% extends 'store/main.html' %}
+{% load static %}
+{% block content %}
+
+<div class="container my-5">
+    <div class="row g-4">
+
+        <!-- Form Section -->
+        <div class="col-lg-6">
+            <div class="card shadow-sm border-0 rounded-3 p-4">
+                <form method="POST" action="{% url 'checkout' %}">
+                    {% csrf_token %}
+                    <h4 class="mb-3 text-center" style="color:#2C5F2D;">Shipping & Contact Info</h4>
+
+                    <!-- User Info -->
+                    <div class="mb-3">
+                        <input required class="form-control" type="text" name="firstname" placeholder="First Name" style="border-radius:10px; background:#F0F5F1; border:1px solid #B7CBB7;">
+                    </div>
+                    <div class="mb-3">
+                        <input required class="form-control" type="text" name="lastname" placeholder="Last Name" style="border-radius:10px; background:#F0F5F1; border:1px solid #B7CBB7;">
+                    </div>
+                    <div class="mb-3"> 
+                        <input required class="form-control" type="email" name="email" placeholder="Email" style="border-radius:10px; background:#F0F5F1; border:1px solid #B7CBB7;">
+                    </div>
+
+                    <!-- Shipping Info -->
+                    <hr>
+                    <h5 style="color:#2C5F2D;">Shipping Information</h5>
+                    <div class="mb-3">
+                        <input required class="form-control" type="text" name="address" placeholder="Address" style="border-radius:10px; background:#F0F5F1; border:1px solid #B7CBB7;">
+                    </div>
+                    <div class="mb-3">
+                        <input required class="form-control" type="text" name="city" placeholder="City" style="border-radius:10px; background:#F0F5F1; border:1px solid #B7CBB7;">
+                    </div>
+                    <div class="mb-3">
+                        <input required class="form-control" type="text" name="state" placeholder="State" style="border-radius:10px; background:#F0F5F1; border:1px solid #B7CBB7;">
+                    </div>
+                    <div class="mb-3">
+                        <input required class="form-control" type="text" name="zipcode" placeholder="Zip code" style="border-radius:10px; background:#F0F5F1; border:1px solid #B7CBB7;">
+                    </div>
+                    <div class="mb-3">
+                        <input required class="form-control" type="text" name="country" placeholder="Country" style="border-radius:10px; background:#F0F5F1; border:1px solid #B7CBB7;">
+                    </div>
+
+                    <!-- Submit -->
+                    
+                </form>
+            </div>
+
+            <!-- Payment Section -->
+            <div class="card shadow-sm border-0 rounded-3 p-4 mt-4" id="payment-info">
+                <h5 class="text-center mb-3" style="color:#2C5F2D;">Payment Options</h5>
+                <div id="paypal-button-container" class="text-center"></div>
+            </div>
+        </div>
+
+        <!-- Order Summary Section -->
+        <div class="col-lg-6">
+            <div class="card shadow-sm border-0 rounded-3 p-4">
+                <a class="btn btn-outline-dark mb-3" href="{% url 'cart' %}">&#x2190; Back to Cart</a>
+                <h4 class="mb-3 text-center" style="color:#2C5F2D;">Order Summary</h4>
+                <hr>
+                {% for order_product in order_products %}
+                    <div class="d-flex align-items-center justify-content-between mb-3 p-2 rounded-2" style="background-color: #F0F5F1;">
+                        <div class="d-flex align-items-center" style="flex:2;">
+                            <img src="{{ order_product.product.imageURL }}" alt="product" class="img-fluid" style="width:60px; height:60px; object-fit:cover; border-radius:5px;">
+                            <p class="mb-0 ms-3">{{ order_product.product.name }}</p>
+                        </div>
+                        <div style="flex:1; text-align:center;">৳{{ order_product.product.price }}</div>
+                        <div style="flex:1; text-align:center;">x{{ order_product.quantity }}</div>
+                    </div>
+                {% endfor %}
+                <hr>
+                <div class="d-flex justify-content-between fw-bold mb-2">
+                    <span>Items:</span>
+                    <span>{{ order.get_total_quantity }}</span>
+                </div>
+                <div class="d-flex justify-content-between fw-bold mb-2">
+                    <span>Total:</span>
+                    <span>৳{{ order.get_total_price|floatformat:2 }}</span>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script>
+    var totalPrice = '{{order.get_total_price|floatformat:2}}';
+
+    // Render Bkash button
+    document.getElementById('paypal-button-container').innerHTML = `
+        <button id="bkash-button" class="btn" 
+                style="background-color:#7BAF9E; color:white; border:none; padding:10px 20px; border-radius:25px; width:60%;">
+            Pay with Bkash
+        </button>
+    `;
+
+    document.getElementById('bkash-button').addEventListener('click', function () {
+        console.log("Bkash payment initiated. Total:", totalPrice);
+        window.location.href = "{% url 'bkash-otp' %}";
+    });
+</script>
+
+{% endblock content %}
