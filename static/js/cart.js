@@ -25,23 +25,43 @@ for (const updateButton of updateButtons) {
 // For non-login user
 function addCookieItem(productId, action) {
     console.log("Not logged in")
+
     if (action == "add") {
-        if (cart[productId] == undefined) {
-            cart[productId] = { 'quantity': 1 }
+        if (!cart[productId]) {
+            cart[productId] = { 'quantity': 1 };
         } else {
-            cart[productId]['quantity'] += 1
+            cart[productId]['quantity'] += 1;
+        }
+        showToast("Product added to cart");
+    } else if (action == "remove") {
+        if (cart[productId]) {
+            cart[productId]['quantity'] -= 1;
+            if (cart[productId]['quantity'] <= 0) {
+                delete cart[productId];
+            }
+            showToast("Product removed from cart");
         }
     }
-    else if (action == "remove") {
-        cart[productId]['quantity'] -= 1
-        if (cart[productId]['quantity'] <= 0) {
-            console.log("Remove item")
-            delete cart[productId]
-        }
+
+    // Update cart cookie
+    document.cookie = 'cart=' + JSON.stringify(cart) + ";domain=;path=/";
+
+    // Update cart badge in navbar
+    const cartBadge = document.querySelector(".cart-badge");
+    if (cartBadge) {
+        let totalQuantity = Object.values(cart).reduce((sum, item) => sum + item.quantity, 0);
+        cartBadge.textContent = totalQuantity;
     }
-    console.log("Cart", cart)
-    document.cookie = 'cart=' + JSON.stringify(cart) + ";domain=;path=/"
-    location.reload()
+
+    // Optionally: update quantity display in cart page if open
+    const quantitySpans = document.querySelectorAll(`.chg-quantity[data-product='${productId}']`);
+    quantitySpans.forEach(span => {
+        const parent = span.parentElement;
+        if (parent) {
+            const qtySpan = parent.querySelector("span");
+            if (qtySpan) qtySpan.textContent = cart[productId] ? cart[productId]['quantity'] : 0;
+        }
+    });
 }
 
 // function UpdateUserItem(productId, action) {
@@ -77,8 +97,13 @@ function UpdateUserItem(button, productId, action) {
             console.log("Catch", error)
         }
 
-        if (res_dict.quantity == 0) {
-            location.reload()
+        if (action === "add") 
+        {
+            showToast("Product added to cart");
+        } 
+        else if (action === "remove")
+        {
+            showToast("Product removed from cart");
         }
 
     }

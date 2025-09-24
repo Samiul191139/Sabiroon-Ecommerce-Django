@@ -51,18 +51,17 @@ def registerUser(request):
 
 
 def loginUser(request):
-    if request.method =="POST":
+    if request.method == "POST":
         username = request.POST.get('username')
         password = request.POST.get('password')
 
         user = authenticate(request, username=username, password=password)
-        if user:
+        if user is not None:
             login(request, user)
             return redirect('store')
         else:
-            messages.info(request, 'Incorrect username or password')
-    context={}
-    return render(request, 'store/login.html',context)
+            messages.error(request, 'Incorrect username or password')  # use error level
+    return render(request, 'store/login.html')
 
 def logoutUser(request):
     logout(request)
