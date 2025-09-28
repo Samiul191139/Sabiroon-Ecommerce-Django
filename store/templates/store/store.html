@@ -12,11 +12,18 @@
         {% for product in products %}
             <div class="col-md-6 col-lg-4">
                 <div class="card h-100 shadow-sm border-0 rounded-4" style="background-color: #E6F0EA;">
-                    <img src="{{ product.imageURL }}" class="card-img-top rounded-top-4" alt="{{ product.name }}" style="height: 280px; object-fit: cover;">
+                    <a href="{% url 'product_detail' product.id %}">
+                        <img src="{{ product.imageURL }}" class="card-img-top rounded-top-4" alt="{{ product.name }}" style="height: 280px; object-fit: cover;">
+                    </a>
                     <div class="card-body d-flex flex-column text-center">
-                        <h5 class="card-title mb-2" style="font-family: 'Cursive', sans-serif; color: #1B3B1A;">{{ product.name }}</h5>
+                        <a href="{% url 'product_detail' product.id %}" style="text-decoration:none;">
+                            <h5 class="card-title mb-2" style="font-family: 'Cursive', sans-serif; color: #1B3B1A;">
+                                {{ product.name }}
+                            </h5>
+                        </a>
                         <p class="card-text fs-5 text-success mb-3">৳{{ product.price }}</p>
-                        <button data-product="{{ product.id }}" data-action="add" class="btn btn-sage btn-sm update-cart" style="background-color: #7BAF9E; color: #fff; border-radius: 25px; padding: 6px 20px;">
+                        <button data-product="{{ product.id }}" data-action="add" class="btn btn-sage btn-sm update-cart"
+                            style="background-color: #7BAF9E; color: #fff; border-radius: 25px; padding: 6px 20px;">
                             Add to Cart
                         </button>
                     </div>

@@ -13,4 +13,4 @@ admin.site.register(Customer)
 admin.site.register(Product)
 admin.site.register(Order, OrderAdmin)
 admin.site.register(Order_Product)
-admin.site.register(Shipping)  # Keep this line to show Shipping as a separate table
+admin.site.register(Shipping) 

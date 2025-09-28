@@ -3,6 +3,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <!-- <meta name="csrf-token" content="{{ csrf_token }}"> -->
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1" />
     <title>Sabiroon</title>
 
@@ -11,6 +12,10 @@
     <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}"/>
 
     <style>
+        .cart-hidden 
+        {
+            display: none;
+        }
       .navbar {
           background-color: #2C5F2D;
       }
@@ -100,10 +105,13 @@
               <a href="/login" class="btn btn-login">Login</a>
               <a href="/register" class="btn btn-register">Sign Up</a>
           {% endif %}
-          <a href="{% url 'cart' %}" class="position-relative text-white ml-3 cart-link" style="font-size:1.5rem;">
-              🛒
-              <span class="cart-badge">{{ cart_total }}</span>
-          </a>
+        <a href="{% url 'cart' %}" class="position-relative text-white ml-3 cart-link" style="font-size:1.5rem;">
+            🛒
+            <!-- <span class="cart-badge">{{ cart_total }}</span> -->
+            <span id="cart-totalnav" class="cart-badge">{{ cart_total }}</span>
+            <span id="cart-totalItem" class="cart-hidden">Items: {{ cart_total }}</span>
+            <span id="cart-totalPrice" class="cart-hidden">$ {{ cart_total_price }}</span>
+        </a>
       </div>
     </div>
   </div>
@@ -130,19 +138,18 @@
   const user = "{{ request.user|default_if_none:'' }}";
 
   // Cookie helper
-  function getCookie(name){
-      let cookieValue = null;
-      if (document.cookie && document.cookie !== ''){
-          const cookies = document.cookie.split(';');
-          for (let i = 0; i < cookies.length; i++){
-              const cookie = cookies[i].trim();
-              if (cookie.substring(0, name.length + 1) === (name + '=')){
-                  cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                  break;
-              }
-          }
+  function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+      for (const cookie of document.cookie.split(';')) {
+        const [key, val] = cookie.trim().split('=');
+        if (key === name) {
+          cookieValue = decodeURIComponent(val);
+          break;
+        }
       }
-      return cookieValue;
+    }
+    return cookieValue;
   }
 
   // Initialize cart from cookie
@@ -151,6 +158,7 @@
       cart = {};
       document.cookie = 'cart=' + JSON.stringify(cart) + ";domain=;path=/";
   }
+  window.csrftoken = getCookie('csrftoken');
 </script>
 
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
@@ -159,7 +167,7 @@
 <!-- <script>
   const user = "{{ request.user|default_if_none:'' }}";
 </script> -->
-<script src="{% static 'js/cart.js' %}"></script>
 <script src="{% static 'js/popup.js' %}"></script>
+<script src="{% static 'js/cart.js' %}"></script>
 </body>
 </html>

@@ -7,6 +7,7 @@ from .models import Product
 from .models import *
 import json
 from .utils import cartData, cookieCart, guestOrder
+from django.shortcuts import render, get_object_or_404
 
 # for userCreation
 from django.contrib.auth.forms import UserCreationForm
@@ -51,17 +52,18 @@ def registerUser(request):
 
 
 def loginUser(request):
-    if request.method == "POST":
+    if request.method =="POST":
         username = request.POST.get('username')
         password = request.POST.get('password')
 
         user = authenticate(request, username=username, password=password)
-        if user is not None:
+        if user:
             login(request, user)
             return redirect('store')
         else:
-            messages.error(request, 'Incorrect username or password')  # use error level
-    return render(request, 'store/login.html')
+            messages.info(request, 'Incorrect username or password')
+    context={}
+    return render(request, 'store/login.html',context)
 
 def logoutUser(request):
     logout(request)
@@ -166,6 +168,13 @@ def update_item(request):
 
     return JsonResponse({'cart_total':cart_total,'cart_totalPrice':cart_totalPrice,'quantity':order_product.quantity, 'unitprice':order_product.product.price}, safe=False)
 
+def store(request):
+    products = Product.objects.all()
+    return render(request, 'store/store.html', {'products': products})
+
+def product_detail(request, pk):
+    product = get_object_or_404(Product, pk=pk)
+    return render(request, 'store/product_detail.html', {'product': product})
 
 from django.shortcuts import render
 from django.http import JsonResponse
