@@ -14,12 +14,12 @@ class Customer(models.Model):
     def __str__(self):
         return f"{self.firstname} {self.lastname}"
 
-
     
 
 class Product(models.Model):
     name =models.CharField(max_length=30)
     price = models.FloatField()
+    description = models.TextField(blank=True, null=True)
     digital = models.BooleanField(default=False, null=True, blank=True)
     image = models.ImageField(null=True, blank=True)
 

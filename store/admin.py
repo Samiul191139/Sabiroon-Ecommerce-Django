@@ -9,8 +9,17 @@ class ShippingInline(admin.TabularInline):
 class OrderAdmin(admin.ModelAdmin):
     inlines = [ShippingInline]
 
+
+@admin.register(Product)
+class ProductAdmin(admin.ModelAdmin):
+    list_display = ('name', 'price')   # Show these columns in product list
+    search_fields = ('name',)          # Search by product name
+    list_filter = ('price',)           # Filter sidebar by price
+    fields = ('name', 'price', 'description', 'image')  # Fields in form
+
+
+# Keep the rest as before
 admin.site.register(Customer)
-admin.site.register(Product)
 admin.site.register(Order, OrderAdmin)
 admin.site.register(Order_Product)
-admin.site.register(Shipping) 
+admin.site.register(Shipping)
